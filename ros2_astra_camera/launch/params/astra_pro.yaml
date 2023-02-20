@@ -19,7 +19,7 @@ astra_camera_node:
     ir_time_offset: -0.033
     rgb_camera_info_url: ''
     rgb_preferred: true
-    use_color: false
+    use_color: true
     use_depth: true
     use_device_time: false
     use_ir: true
@@ -30,7 +30,7 @@ astra_camera_node:
 uvc_camera_node:
   ros__parameters:
     vendor: "0x2bc5"
-    product: "0x0502"
+    product: "0x0501"
     serial: ""
     index: 0
     width: 640
