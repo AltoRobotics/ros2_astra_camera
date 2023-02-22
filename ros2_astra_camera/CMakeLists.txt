@@ -78,7 +78,8 @@ rclcpp_components_register_nodes(astra_driver "ros2_astra_camera::AstraDriver")
 add_library(camera_driver SHARED src/camera_driver.cpp)
 target_compile_definitions(camera_driver PRIVATE "COMPOSITION_BUILDING_DLL")
 ament_target_dependencies(camera_driver ${dependencies})
-target_link_libraries(camera_driver astra_wrapper ${libuvc_LIBRARIES})
+
+target_link_libraries(camera_driver astra_wrapper uvc)
 rclcpp_components_register_nodes(camera_driver
                                  "ros2_astra_camera::CameraDriver")
 
