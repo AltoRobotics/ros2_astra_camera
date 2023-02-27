@@ -17,9 +17,13 @@ def generate_launch_description():
     urdf_path = os.path.join(package_dir, 'launch', 'urdf', 'astra_pro.urdf')
 
     enable_color_cloud = LaunchConfiguration('enable_color_cloud')
+    load_camera_description = LaunchConfiguration('load_camera_description')
 
     declare_enable_color_cloud_cmd = DeclareLaunchArgument(
         'enable_color_cloud', default_value='False', description='Whether to enable color cloud')
+
+    declare_load_camera_description_cmd = DeclareLaunchArgument(
+        'load_camera_description', default_value='True', description='Whether to load the camera urdf')
 
     start_depth_image_to_color_cloud_container_cmd = ComposableNodeContainer(
         name='depth_image_proc_container',
@@ -91,14 +95,16 @@ def generate_launch_description():
         output='screen',
         emulate_tty=True,
         parameters=[{'robot_description': Command(['xacro ', urdf_path])}],
+        condition=IfCondition(load_camera_description)
     )
 
     ld = LaunchDescription()
     ld.add_action(declare_enable_color_cloud_cmd)
+    ld.add_action(declare_load_camera_description_cmd)
     ld.add_action(start_depth_image_to_color_cloud_container_cmd)
     ld.add_action(start_depth_image_to_cloud_container_cmd)
     ld.add_action(start_astra_camera_node_cmd)
     ld.add_action(start_uvc_camera_node_cmd)
-    # ld.add_action(start_robot_state_publisher_node_cmd)
+    ld.add_action(start_robot_state_publisher_node_cmd)
 
     return ld
