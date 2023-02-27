@@ -10,9 +10,10 @@ from launch.substitutions import LaunchConfiguration, PythonExpression
 
 def generate_launch_description():
     package_dir = get_package_share_directory('ros2_astra_camera')
+    parameters_path_uvc = os.path.join(
+        package_dir, 'launch', 'params', 'astra_pro_uvc_camera_config.yaml')
     parameters_path = os.path.join(
-        package_dir, 'launch', 'params', 'astra_pro.yaml')
-    urdf = os.path.join(package_dir, 'launch', 'urdf', 'astra_pro.urdf')
+        package_dir, 'launch', 'params', 'astra_pro_camera_config.yaml')
 
     enable_color_cloud = LaunchConfiguration('enable_color_cloud')
 
@@ -79,7 +80,7 @@ def generate_launch_description():
         name="uvc_camera_node",
         output="screen",
         emulate_tty=True,
-        parameters=[parameters_path]
+        parameters=[parameters_path_uvc]
     )
 
     start_robot_state_publisher_node_cmd = Node(
