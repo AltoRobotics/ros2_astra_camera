@@ -5,7 +5,7 @@ from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node, ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
 from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration, PythonExpression
+from launch.substitutions import LaunchConfiguration, PythonExpression, Command
 
 
 def generate_launch_description():
@@ -14,6 +14,7 @@ def generate_launch_description():
         package_dir, 'launch', 'params', 'astra_pro_uvc_camera_config.yaml')
     parameters_path = os.path.join(
         package_dir, 'launch', 'params', 'astra_pro_camera_config.yaml')
+    urdf_path = os.path.join(package_dir, 'launch', 'urdf', 'astra_pro.urdf')
 
     enable_color_cloud = LaunchConfiguration('enable_color_cloud')
 
@@ -89,7 +90,7 @@ def generate_launch_description():
         name='robot_state_publisher',
         output='screen',
         emulate_tty=True,
-        arguments=[urdf]
+        parameters=[{'robot_description': Command(['xacro ', urdf_path])}],
     )
 
     ld = LaunchDescription()

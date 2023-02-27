@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-<robot name="astra_pro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
   <link name="camera_link"/>
   <link name="camera_rgb_frame"/>
   <link name="camera_rgb_optical_frame"/>
