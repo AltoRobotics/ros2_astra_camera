@@ -11,11 +11,11 @@
     depth_frame_id: camera_depth_optical_frame
     depth_ir_offset_x: 5.0
     depth_ir_offset_y: 4.0
-    depth_mode: 7
+    depth_mode: 10
     depth_registration: true
     depth_time_offset: 0.0
     device_id: '#1'
-    ir_mode: 7
+    ir_mode: 10
     ir_time_offset: -0.033
     rgb_camera_info_url: ''
     rgb_preferred: true
@@ -26,3 +26,9 @@
     use_sim_time: false
     z_offset_mm: 0.0
     z_scaling: 1.0
+
+# Video modes are
+# 13: 160x120@30Hz
+# 10: 320x240@30Hz
+#  7: 640x480@30Hz
+# Mapped in astra_driver.cpp

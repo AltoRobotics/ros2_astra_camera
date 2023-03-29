@@ -13,3 +13,9 @@
     camera_info_url: ""
     scanning_mode: 0
     auto_exposure: 3
+
+# Video modes are
+# 13: 160x120@30Hz
+# 10: 320x240@30Hz
+#  7: 640x480@30Hz
+# Mapped in astra_driver.cpp
