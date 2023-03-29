@@ -4,7 +4,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node, ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
-from launch.conditions import IfCondition
+from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import LaunchConfiguration, PythonExpression, Command
 
 
@@ -53,7 +53,7 @@ def generate_launch_description():
         namespace='',
         package='rclcpp_components',
         executable='component_container',
-        condition=IfCondition(PythonExpression(['not ', enable_color_cloud])),
+        condition=UnlessCondition(enable_color_cloud),
         composable_node_descriptions=[
                 ComposableNode(
                     package='depth_image_proc',
@@ -85,7 +85,8 @@ def generate_launch_description():
         name="uvc_camera_node",
         output="screen",
         emulate_tty=True,
-        parameters=[parameters_path_uvc]
+        parameters=[parameters_path_uvc],
+        condition=IfCondition(enable_color_cloud)
     )
 
     start_robot_state_publisher_node_cmd = Node(
